@@ -1,0 +1,23 @@
+Index: profiles/commerce_kickstart/modules/contrib/search_api_ranges/search_api_ranges.module
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- modules/contrib/search_api_ranges/search_api_ranges.module	(revision )
++++ modules/contrib/search_api_ranges/search_api_ranges.module	(revision )
+@@ -251,10 +252,14 @@
+   // Get path or facetapi_pretty_paths
+   $path = $variables['target'];
+   if (module_exists('facetapi_pretty_paths')) {
+-    $path = ltrim(parse_url(request_uri(), PHP_URL_PATH), '/');
++    if($pretty_path = ltrim(parse_url(request_uri(), PHP_URL_PATH), '/')) {
++      $path = $pretty_path;
++    }
+     unset($_GET['f']);
+   }
+ 
++  global $base_path;
++  $form['#action'] = $base_path . $path;
+   $form['text-range'] = array('#markup' => '<p class="text-range">' . t('!field_name ranges from !prefix_' . $variables['range_field'] . '@from!suffix_' . $variables['range_field'] . ' to !prefix_' . $variables['range_field'] . '@to!suffix_' . $variables['range_field'], array(
+       '!field_name' => t($variables['name']),
+       '@from' => number_format($variables['min'], 0, ',', '.'),
