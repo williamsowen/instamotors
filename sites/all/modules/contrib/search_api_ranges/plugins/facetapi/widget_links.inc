@@ -25,10 +25,10 @@ class SearchApiRangesWidgetLinks extends FacetapiWidgetLinks {
     $range_field = $this->facet['field alias'];
 
     // Get facet path field/alias
-    if (module_exists('facetapi_pretty_paths')) {
+   /* if (module_exists('facetapi_pretty_paths')) {
       $processor = new FacetapiUrlProcessorPrettyPaths($this->facet->getAdapter());
       $range_field = $processor->getFacetPrettyPathsAlias($this->facet->getFacet());
-    };
+    };*/
 
     // Prepare variables for min/max query
     $variables = array(
@@ -49,7 +49,7 @@ class SearchApiRangesWidgetLinks extends FacetapiWidgetLinks {
     }
 
     // Replace ':' with '/'
-    if (module_exists('facetapi_pretty_paths')) {
+    /*if (module_exists('facetapi_pretty_paths')) {
       foreach($element as $key => $e){
         if (isset($e['#query']['f'])){
           $element[$key]['#query']['f'] = str_replace(':', '/', $e['#query']['f']);
@@ -61,18 +61,18 @@ class SearchApiRangesWidgetLinks extends FacetapiWidgetLinks {
         }
       }
     }
-
+*/
     // Sets each item's theme hook, builds item list.
     $this->setThemeHooks($element);
 
     $items_build = $this->buildListItems($element);
 
     // Replace ?f[0]= with /
-    if (module_exists('facetapi_pretty_paths')) {
+   /* if (module_exists('facetapi_pretty_paths')) {
       foreach($items_build as $key => $build){
         $items_build[$key]['data'] = str_replace('?f[0]=', '/', $build['data']);
       }
-    }
+    }*/
 
     $element = array(
       '#theme' => 'item_list',
@@ -136,7 +136,7 @@ class SearchApiRangesWidgetLinks extends FacetapiWidgetLinks {
       '#type' => 'textfield',
       '#title' => t('Simple range'),
       '#default_value' => $this->settings->settings['range_simple'],
-      '#description' => t('Add a fixed range to create "range facet". 
+      '#description' => t('Add a fixed range to create "range facet".
         For example, "10" on a price field will create 10 - 20, 20 - 30 etc.'),
       '#states' => array(
         'visible' => array(
@@ -151,7 +151,7 @@ class SearchApiRangesWidgetLinks extends FacetapiWidgetLinks {
       '#type' => 'textarea',
       '#title' => t('Advanced range'),
       '#default_value' => $this->settings->settings['range_advanced'],
-      '#description' => t('Add a pre-defined list of ranges to create 
+      '#description' => t('Add a pre-defined list of ranges to create
         "range facets". For examples, refer to README in search api range.'),
       '#states' => array(
         'visible' => array(

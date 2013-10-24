@@ -1,0 +1,4 @@
+name = Instamotors Custom
+description = Custom moduile code for Instamotors
+package = Instamotors
+core = 7.x
